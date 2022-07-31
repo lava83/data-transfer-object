@@ -15,7 +15,7 @@ class NumberBetween implements Validator
     ) {
     }
 
-    public function validate(mixed $value): ValidationResult
+    public function validate(mixed $value, array $context = []): ValidationResult
     {
         if ($value < $this->min) {
             return new ValidationResult(false, "Value should be greater than or equal to {$this->min}");
