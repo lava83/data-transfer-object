@@ -35,7 +35,7 @@ abstract class DataTransferObject
             throw UnknownProperties::new(static::class, array_keys($args));
         }
 
-        $class->validate($this->toArray());
+        $class->validate($this);
     }
 
     public static function arrayOf(array $arrayOfParameters): array

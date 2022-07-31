@@ -41,7 +41,7 @@ class DataTransferObjectClass
         );
     }
 
-    public function validate(array $context = []): void
+    public function validate(DataTransferObject $dataTransferObject): void
     {
         $validationErrors = [];
 
@@ -49,7 +49,11 @@ class DataTransferObjectClass
             $validators = $property->getValidators();
 
             foreach ($validators as $validator) {
-                $result = $validator->validate($property->getValue(), $context);
+                $result = $validator->validate(
+                    $property->getValue(),
+                    $dataTransferObject,
+                    $property
+                );
 
                 if ($result->isValid) {
                     continue;

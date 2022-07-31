@@ -3,6 +3,8 @@
 namespace Spatie\DataTransferObject\Tests\Dummy;
 
 use Attribute;
+use Spatie\DataTransferObject\DataTransferObject;
+use Spatie\DataTransferObject\Reflection\DataTransferObjectProperty;
 use Spatie\DataTransferObject\Validation\ValidationResult;
 use Spatie\DataTransferObject\Validator;
 
@@ -15,7 +17,11 @@ class NumberBetween implements Validator
     ) {
     }
 
-    public function validate(mixed $value, array $context = []): ValidationResult
+    public function validate(
+        mixed $value,
+        DataTransferObject $dataTransferObject,
+        DataTransferObjectProperty $dataTransferObjectProperty,
+    ): ValidationResult
     {
         if ($value < $this->min) {
             return new ValidationResult(false, "Value should be greater than or equal to {$this->min}");
